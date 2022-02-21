@@ -1,33 +1,53 @@
 import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
+import {AiFillHome} from 'react-icons/ai'
+import {FiLogOut} from 'react-icons/fi'
+import {BsBriefcaseFill} from 'react-icons/bs'
 import './index.css'
 
-const Header = props => {
+function Header(props) {
   const onClickLogout = () => {
-    Cookies.remove('jwt_token')
     const {history} = props
+    Cookies.remove('jwt_token')
     history.replace('/login')
   }
-
   return (
-    <nav className="nav-container">
-      <div className="items-container">
+    <nav className="nav-bar">
+      <Link to="/" className="link-decor">
         <img
           src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
           alt="website logo"
+          className="nav-logo"
         />
-        <ul className="ul-items">
-          <li className="li-items">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="li-items">
-            <Link to="/jobs">Jobs</Link>
-          </li>
-        </ul>
-        <button onClick={onClickLogout} className="logout-btn" type="button">
-          Logout
-        </button>
-      </div>
+      </Link>
+
+      <ul className="login-mobile-routes">
+        <li>
+          <Link to="/" className="link-decor">
+            <AiFillHome className="logout-logo" />
+          </Link>
+        </li>
+        <li>
+          <Link to="/jobs" className="link-decor">
+            <BsBriefcaseFill className="logout-logo" />
+          </Link>
+        </li>
+        <li>
+          <FiLogOut className="logout-logo" onClick={onClickLogout} />
+        </li>
+      </ul>
+
+      <ul className="login-routes">
+        <Link to="/" className="link-decor">
+          <li className="nav-item">Home</li>
+        </Link>
+        <Link to="/jobs" className="link-decor">
+          <li className="nav-item">Jobs</li>
+        </Link>
+      </ul>
+      <button type="button" className="logout-button" onClick={onClickLogout}>
+        Logout
+      </button>
     </nav>
   )
 }

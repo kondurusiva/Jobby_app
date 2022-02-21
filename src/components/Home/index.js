@@ -1,29 +1,25 @@
-import {Redirect} from 'react-router-dom'
-import Cookies from 'js-cookie'
+import {Link} from 'react-router-dom'
 import Header from '../Header'
-
 import './index.css'
 
-const Home = () => {
-  const jwtToken = Cookies.get('jwt_token')
-  if (jwtToken === undefined) {
-    return <Redirect to="/login" />
-  }
-
-  return (
+const Home = () => (
+  <>
+    <Header />
     <div className="home-bg-container">
-      <Header />
-      <div className="home-container">
-        <h1 className="home-heading">Find The Job That Fits Your Life</h1>
-        <p className="home-description">
-          Millions of people are searching for jobs,salary information, company
-          reviews. Find the job that fits your abilities and potentials
+      <div className="banner-content">
+        <h1 className="heading">Find The Job That Fits Your Life</h1>
+        <p className="description">
+          Millions of people are searching for jobs, salary, information,
+          company reviews
         </p>
-        <button className="jobs-btn" type="button">
-          Find Jobs
-        </button>
+        <Link to="/jobs">
+          <button type="button" className="find-jobs-button">
+            Find Jobs
+          </button>
+        </Link>
       </div>
     </div>
-  )
-}
+  </>
+)
+
 export default Home
